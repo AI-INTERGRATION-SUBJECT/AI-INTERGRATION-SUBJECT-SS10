@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  langfuse-server:
+    image: langfuse/langfuse:2
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://langfuse_user:SecurePassword123@aws-rds-postgres.internal:5432/langfuse_db?schema=public
+      - NEXTAUTH_URL=http://localhost:3000
+      - NEXTAUTH_SECRET=my-super-secret-key-rikkeipay-2026
+      - SALT=my-salt-key-2026
+      - TELEMETRY_ENABLED=false
+      - CLICKHOUSE_URL=http://clickhouse-server:8123
+      - CLICKHOUSE_USER=default
+      - CLICKHOUSE_PASSWORD=ClickhouseSecure123!
+    depends_on:
+      - clickhouse-server
+    restart: always
+
+  clickhouse-server:
+    image: clickhouse/clickhouse-server:24.3
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    environment:
+      - CLICKHOUSE_USER=default
+      - CLICKHOUSE_PASSWORD=ClickhouseSecure123!
+    volumes:
+      - clickhouse_data:/var/lib/clickhouse
+    restart: always
+
+volumes:
+  clickhouse_data:
