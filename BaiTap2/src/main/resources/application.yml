@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: rikkeipay-langfuse-tracing
+
+langfuse:
+  public-key: ${LANGFUSE_PUBLIC_KEY:pk-lf-prod-default-key}
+  secret-key: ${LANGFUSE_SECRET_KEY:sk-lf-prod-default-secret}
+  base-url: ${LANGFUSE_BASE_URL:http://localhost:3000}
+  enabled: true
+
+server:
+  port: 8080
