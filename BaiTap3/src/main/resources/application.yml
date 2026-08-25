@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: rikkeipay-prompt-registry
+
+spring.ai.openai:
+  api-key: ${ROUTER_API_KEY:sk-or-v1-dummy-key-for-test}
+  base-url: https://openrouter.ai/api/v1
+  chat.options.model: google/gemini-2.5-flash
+
+langfuse:
+  public-key: ${LANGFUSE_PUBLIC_KEY:pk-lf-prod-default-key}
+  secret-key: ${LANGFUSE_SECRET_KEY:sk-lf-prod-default-secret}
+  base-url: ${LANGFUSE_BASE_URL:http://localhost:3000}
+
+server:
+  port: 8080
